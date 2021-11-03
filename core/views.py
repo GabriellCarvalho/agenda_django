@@ -91,3 +91,12 @@ def json_lista_evento(request):
     usuario = request.user
     evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
     return JsonResponse(list(evento), safe=False)
+
+@login_required(login_url='/login/')
+def historico_evento(request):
+    usuario = request.user
+    data_atual = datetime.now() - timedelta(hours=1)
+    evento = Evento.objects.filter( usuario=usuario,
+                                    data_evento__lt=data_atual) 
+    response = {'eventos': evento}
+    return render(request, 'historico.html', response)

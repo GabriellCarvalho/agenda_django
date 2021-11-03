@@ -27,3 +27,9 @@ class Evento(models.Model):
             return True
         else:
             return False
+
+    def get_prox_evento(self):
+        if self.data_evento < datetime.now() + timedelta(hours=1):
+             return True
+        else:
+            return False

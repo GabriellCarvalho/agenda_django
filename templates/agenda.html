@@ -8,8 +8,11 @@
     <ul style="font-size: 18px">
         {% for evento in eventos %}
             <li>
-                <div style={% if evento.get_evento_atrasado %}
+                <div style= {% if evento.get_evento_atrasado %}
                                 "color:red" 
+                            {% endif %}
+                            {% if evento.get_prox_evento %}
+                                "color:yellow"
                             {% endif %}>
                     {{ evento.titulo}} - {{ evento.get_data_evento }} 
                     (<a href="evento/?id={{ evento.id }}">Editar</a> /
@@ -18,4 +21,7 @@
             </li>
         {% endfor %}
     </ul>
+    <a href="historico/">
+        <button type="button">Historico</button>
+    </a>
 {% endblock %}
